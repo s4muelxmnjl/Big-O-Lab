@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BookOpen, ChevronDown } from "lucide-react";
+import { ExampleDiagram } from "./ExampleDiagram";
 import { guideFor, isStarterChallenge } from "../domain/guides";
 export function SolveGuide({ id }: { id: string }) {
   const [open, setOpen] = useState(isStarterChallenge(id));
@@ -26,6 +27,7 @@ export function SolveGuide({ id }: { id: string }) {
           <div className="guide-example">
             <strong>Un ejemplo parecido</strong>
             <p>{guide.example}</p>
+            <ExampleDiagram id={id} />
           </div>
           <p className="microcopy">
             Ahora aplica el mismo método a los datos de tu reto. Puedes

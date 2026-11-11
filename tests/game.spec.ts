@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { diagramFor, markedCount } from "../src/domain/diagrams";
 import { guideFor, isStarterChallenge } from "../src/domain/guides";
 import { challenges } from "../src/domain/challenges";
 async function solveLevel(
@@ -25,6 +26,18 @@ async function solveLevel(
     await expect(
       guide.getByText(guideFor(qs[i].id).example, { exact: true }),
     ).toBeVisible();
+    const visual = guide.getByRole("region", {
+      name: "Ilustración del ejemplo",
+    });
+    const panels = diagramFor(qs[i].id).panels;
+    await expect(visual.getByRole("img")).toHaveCount(panels.length);
+    for (let panelIndex = 0; panelIndex < panels.length; panelIndex++) {
+      const image = visual.getByRole("img").nth(panelIndex);
+      await expect(image).toBeVisible();
+      await expect(image.locator('rect[data-marked="true"]')).toHaveCount(
+        markedCount(panels[panelIndex]),
+      );
+    }
     if (qs[i].id === "intro") {
       for (const row of ["Ana", "Leo", "Sol", "Max"])
         for (const col of ["Ana", "Leo", "Sol", "Max"])
@@ -186,6 +199,14 @@ test("móvil, teclado, movimiento reducido y datos corruptos", async ({
   await expect(page.getByText("1 de 16 encuentros")).toBeVisible();
   await solveLevel(page, 1);
   await expect(page.getByText("100 XP", { exact: true })).toBeVisible();
+  await page
+    .getByRole("region", { name: "Ilustración del ejemplo" })
+    .screenshot({ path: "/tmp/big-o-grid-example.png" });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
   await page.screenshot({ path: "/tmp/big-o-lab-mobile.png", fullPage: true });
   await page.getByRole("button", { name: "Siguiente nivel" }).click();
   expect(

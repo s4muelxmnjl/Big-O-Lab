@@ -23,7 +23,7 @@ En el entorno cloud, si la caché del usuario no es escribible: `npm ci --cache 
 
 Los primeros retos usan números pequeños y opciones de respuesta; después vuelven los cálculos escritos. El simulador empieza en 3 × 3 y velocidad lenta. Los ejercicios combinan tareas y distinguen límites constantes de límites que crecen con la entrada. Hay 19 retos en total.
 
-Cada reto ofrece una guía «Cómo resolver este reto» con tres pasos y un ejemplo parecido que usa otros datos. En los primeros está abierta desde el inicio; en los avanzados se consulta al necesitarla.
+Cada reto ofrece una guía «Cómo resolver este reto» con tres pasos y un ejemplo parecido que usa otros datos. Los 19 ejemplos incluyen ilustraciones SVG con cuadrículas, ejes, celdas y totales; muestran comparaciones antes/después, sumas de recorridos y parejas triangulares. Los ejemplos sobre memoria o acceso directo distinguen posiciones y datos de operaciones. En los primeros está abierta desde el inicio; en los avanzados se consulta al necesitarla.
 
 Después de cada acierto se explica lo resuelto en tres pasos, con una idea clave y una conexión al siguiente reto. Las explicaciones se pueden repasar al volver a un ejercicio resuelto. La última respuesta conserva su explicación hasta que eliges ver la victoria.
 

@@ -18,7 +18,7 @@ Objetivo: juego práctico en español para principiantes, con primeros retos acc
 
 ## Validación ejecutada
 
-`npm run build`: correcto. `npm test`: 10/10. `npm run test:e2e`: 4/4 en Chromium: recorrido completo y XP, bloqueo/desbloqueo, 19 explicaciones, cálculos incorrectos, tablero sin doble conteo, exploración de pasos, recarga, teclado/móvil y laboratorio real (validación de datos, memoria, conteos, salida temprana, reproducción y cancelación al reiniciar). Capturas en `/tmp/big-o-lab-{mobile,desktop,practical}.png`.
+`npm run build`: correcto. `npm test`: 13/13. `npm run test:e2e`: 4/4 en Chromium: recorrido completo y XP, bloqueo/desbloqueo, 19 explicaciones, cálculos incorrectos, tablero sin doble conteo, exploración de pasos, recarga, teclado/móvil y laboratorio real (validación de datos, memoria, conteos, salida temprana, reproducción y cancelación al reiniciar). Capturas en `/tmp/big-o-lab-{mobile,desktop,practical}.png`.
 
 ## Entrega y continuación
 
@@ -31,3 +31,9 @@ Próxima tarea exacta: comprobar la ejecución de Pages tras subir este cambio; 
 ## Actualización: inicio accesible y método de resolución
 
 Se simplificaron los retos de predicción iniciales (3×3, 4×4 y 4×2). Los siguientes suben a tareas combinadas con n=10 y comparación de estrategias con n=20. Los retos de los niveles 4 y 5 mantienen su dificultad anterior. Se añadieron guías para los 19 retos: tres pasos y un ejemplo análogo con otros datos. Las primeras cinco guías están abiertas al inicio; las demás son desplegables. Archivos nuevos: `src/domain/guides.ts` y `src/components/SolveGuide.tsx`. Se mantienen IDs, XP y progreso guardado. Validación: build correcto, 10/10 pruebas de lógica y 4/4 de navegador; recorrido comprueba las 19 guías, opciones iniciales, cálculos posteriores, explicaciones, desbloqueos y persistencia.
+
+## Actualización: cuadrículas en los ejemplos
+
+Los 19 ejemplos de las guías incorporan diagramas SVG accesibles y adaptables (`src/domain/diagrams.ts`, `src/components/ExampleDiagram.tsx`). Los diagramas representan las cantidades del ejemplo análogo, no adelantan el resultado del reto. Incluyen cuadrados, rectángulos, crecimiento antes/después, recorridos sumados, parejas triangulares y lectura directa; los casos de memoria distinguen datos de operaciones. Las casillas no visitadas son grises con borde discontinuo. No hay dependencias ni descargas de imágenes externas.
+
+Validación: build correcto, 13 pruebas de lógica y 4 de navegador aprobadas. Las pruebas verifican los conteos de celdas activas de los 19 ejemplos y su visibilidad; captura móvil inspeccionada en `/tmp/big-o-grid-example.png`. Se conservan dificultad, XP y progreso.
