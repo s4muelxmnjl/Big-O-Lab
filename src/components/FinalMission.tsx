@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { DuplicateLab } from "./DuplicateLab";
 import { pairs } from "../domain/model";
 export function FinalMission() {
   const [n, setN] = useState(10);
   return (
     <>
+      <DuplicateLab />
       <section className="panel mission">
         <span className="eyebrow cyan">MISIÓN · DETECTAR REPETIDOS</span>
         <h2>
@@ -39,9 +41,12 @@ export function FinalMission() {
             </strong>
             <p>comparaciones de valores · n(n−1)/2</p>
             <div className="bar quadratic" />
-            <pre>
-              <code>{`function repetidos(numbers) {\n  for (let i = 0; i < numbers.length; i++) {\n    for (let j = i + 1; j < numbers.length; j++) {\n      if (numbers[i] === numbers[j]) return true;\n    }\n  }\n  return false;\n}`}</code>
-            </pre>
+            <details className="code-disclosure">
+              <summary>Ver código de la estrategia</summary>
+              <pre>
+                <code>{`function repetidos(numbers) {\n  for (let i = 0; i < numbers.length; i++) {\n    for (let j = i + 1; j < numbers.length; j++) {\n      if (numbers[i] === numbers[j]) return true;\n    }\n  }\n  return false;\n}`}</code>
+              </pre>
+            </details>
             <p>Espacio adicional O(1). Revisa cada pareja distinta una vez.</p>
           </article>
           <article>
@@ -57,9 +62,12 @@ export function FinalMission() {
                 width: `${Math.max(2, Math.min(100, ((2 * n) / Math.max(pairs(n), 2 * n)) * 100))}%`,
               }}
             />
-            <pre>
-              <code>{`function repetidos(numbers) {\n  const vistos = new Set();\n  for (const number of numbers) {\n    if (vistos.has(number)) return true;\n    vistos.add(number);\n  }\n  return false;\n}`}</code>
-            </pre>
+            <details className="code-disclosure">
+              <summary>Ver código de la estrategia</summary>
+              <pre>
+                <code>{`function repetidos(numbers) {\n  const vistos = new Set();\n  for (const number of numbers) {\n    if (vistos.has(number)) return true;\n    vistos.add(number);\n  }\n  return false;\n}`}</code>
+              </pre>
+            </details>
             <p>Espacio adicional O(n). Guarda hasta n valores ya vistos.</p>
           </article>
         </div>

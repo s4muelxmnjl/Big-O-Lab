@@ -1,23 +1,29 @@
 # Big O Lab checkpoint
 
-Objetivo: minijuego completo en español basado en el prompt maestro.
+Objetivo: juego práctico en español para principiantes, con retos cada vez más exigentes y explicaciones al resolverlos.
 
-Implementado: cinco niveles, 18 preguntas, simulador n² (1–20), controles y pseudocódigo, comparativa parejas/Set, XP idempotente, desbloqueos, insignias, victoria, persistencia versionada, reinicio confirmado, teclado y movimiento reducido, interfaz adaptable.
+## Implementado
 
-Archivos clave: `src/domain/{challenges,model}.ts`, `src/hooks/`, `src/components/`, `src/App.tsx`, `src/styles.css`.
+- Cinco niveles, 19 retos, desbloqueos en orden, 100 XP una vez por reto, insignias y victoria. Se conservan los identificadores y el progreso anterior.
+- Primer reto: construir los 16 encuentros entre cuatro estudiantes en un tablero interactivo. Una casilla solo cuenta una vez.
+- Predicciones y algunas evaluaciones: escribir cálculos propios y comprobarlos. Incluye n² + 2n y distinguir un interno fijo de otro con n/2 vueltas.
+- Simulador n² (n de 1 a 20), iniciar/pausar/paso/reiniciar, velocidad ajustable, explorar cualquier paso y explicación contextual de índices y cambios de fila.
+- Misión final: arreglos editables de 2 a 12 enteros, escenarios de repetidos al principio/final, trazas reales por parejas y Set, resaltar posiciones, mostrar memoria, salida temprana, ejecutar/pausar/paso/reiniciar. Las cuentas son representativas, no tiempos reales.
+- Los 19 retos conservan su recapitulación de tres pasos, idea clave y conexión al siguiente ejercicio. La última explicación permanece antes de ver la victoria.
+- Interfaz adaptable, teclado, movimiento reducido, progreso local versionado y manejo de almacenamiento corrupto o no disponible.
 
-Validación ejecutada: `npm run build` correcto; `npm test` 6/6; `npm run test:e2e` 3/3 en Chromium (recorrido completo, controles, recarga, no duplicación de XP, reinicio, móvil y teclado). Capturas locales en `/tmp/big-o-lab-{desktop,mobile}.png`.
+## Archivos clave
 
-Entrega: workflow `.github/workflows/pages.yml` para validar y desplegar `main`; Vite usa base relativa para alojar el proyecto bajo una subruta.
+`src/domain/{challenges,learning,model,traces}.ts`; `src/components/{PracticalAnswer,DuplicateLab,Simulator,ChallengeCard,LearningRecap}.tsx`; `src/hooks/`; `src/App.tsx`; `src/styles.css`.
 
-Despliegue remoto: la primera ejecución de Actions pasó instalación, pruebas y build, pero falló en Configurar Pages: `Create Pages site failed. Resource not accessible by integration`. El token de Actions no puede activar inicialmente Pages. Se necesita seleccionar GitHub Actions como fuente en Settings → Pages y volver a ejecutar el workflow. La API directa también está bloqueada por la red del entorno (HTTP 403 a api.github.com).
+## Validación ejecutada
 
-Próxima tarea exacta: comprobar la primera ejecución del workflow Pages y la página publicada. Para desarrollo usar el checkout existente `/workspace/Big-O-Lab`; no crear worktrees sin petición explícita. `npm ci --cache /workspace/.npm-cache` si la caché del usuario no es escribible, luego `npm run dev`.
+`npm run build`: correcto. `npm test`: 10/10. `npm run test:e2e`: 4/4 en Chromium: recorrido completo y XP, bloqueo/desbloqueo, 19 explicaciones, cálculos incorrectos, tablero sin doble conteo, exploración de pasos, recarga, teclado/móvil y laboratorio real (validación de datos, memoria, conteos, salida temprana, reproducción y cancelación al reiniciar). Capturas en `/tmp/big-o-lab-{mobile,desktop,practical}.png`.
 
-## Actualización: explicaciones y dificultad progresiva
+## Entrega y continuación
 
-- Los 18 retos muestran al resolverlos un concepto, tres pasos, una idea clave y una conexión al siguiente ejercicio (`src/domain/learning.ts`, `LearningRecap.tsx`). Se conservan al volver a un reto resuelto o recargar.
-- Predecir ahora escala desde contar y duplicar hasta recorridos rectangulares, tareas consecutivas y comparación de estrategias. La evaluación final exige justificar trabajo y memoria con un presupuesto concreto.
-- La barra de retos muestra el avance dentro del nivel. `challengeUnlocked` exige todos los retos anteriores; completar el nivel abre el siguiente. Se mantienen los identificadores y el progreso previo, sin XP repetidos.
-- La última respuesta ya no se oculta automáticamente: primero se puede leer su explicación, después pulsar «Ver mi victoria».
-- Validación: build correcto, 7 pruebas de lógica y 3 de Chromium aprobadas; el recorrido verifica las 18 explicaciones, bloqueo/desbloqueo de cada reto, barra de avance, recarga, XP y revisión antes de la victoria. Móvil y teclado incluidos.
+Subir directamente a `main`, sin PR, según instrucción del usuario. `.github/workflows/pages.yml` valida y publica Pages. Se verificó que la ejecución del commit anterior `9d7db2c` terminó con éxito; el bloqueo inicial de activación de Pages ya está resuelto. La API de GitHub puede seguir bloqueada por la red, pero el HTML público de Actions permite comprobar las ejecuciones.
+
+Usar el checkout existente `/workspace/Big-O-Lab`, sin worktrees salvo petición explícita. `npm ci --cache /workspace/.npm-cache` si la caché del usuario no es escribible; `npm run dev`. No hay backend, secretos ni APIs externas.
+
+Próxima tarea exacta: comprobar la ejecución de Pages tras subir este cambio; después iterar a partir de pruebas de jugadores, sin añadir nuevas dependencias por decoración.

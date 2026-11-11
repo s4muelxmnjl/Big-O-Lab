@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Check, Lightbulb, RotateCcw } from "lucide-react";
+import { PracticalAnswer, isNumericChallenge } from "./PracticalAnswer";
 import { LearningRecap } from "./LearningRecap";
 import type { Challenge } from "../domain/challenges";
 export function ChallengeCard({
@@ -27,27 +28,39 @@ export function ChallengeCard({
           <code>{q.code}</code>
         </pre>
       )}
-      <div className="answers">
-        {q.options.map((option, i) => (
-          <button
-            key={option}
-            className={`answer ${answer === i ? (correct ? "correct" : "incorrect") : ""}`}
-            aria-pressed={answer === i}
-            onClick={() => {
-              setAnswer(i);
-              onAnswer(q.id, i);
-            }}
-          >
-            <span className="answer-letter">{String.fromCharCode(65 + i)}</span>
-            {option}
-            {answer === i && correct ? (
-              <Check size={18} />
-            ) : (
-              <ArrowRight size={17} />
-            )}
-          </button>
-        ))}
-      </div>
+      {q.id === "intro" || isNumericChallenge(q) ? (
+        <PracticalAnswer
+          challenge={q}
+          onSubmit={(index) => {
+            setAnswer(index);
+            onAnswer(q.id, index);
+          }}
+        />
+      ) : (
+        <div className="answers">
+          {q.options.map((option, i) => (
+            <button
+              key={option}
+              className={`answer ${answer === i ? (correct ? "correct" : "incorrect") : ""}`}
+              aria-pressed={answer === i}
+              onClick={() => {
+                setAnswer(i);
+                onAnswer(q.id, i);
+              }}
+            >
+              <span className="answer-letter">
+                {String.fromCharCode(65 + i)}
+              </span>
+              {option}
+              {answer === i && correct ? (
+                <Check size={18} />
+              ) : (
+                <ArrowRight size={17} />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
       <div role="status">
         {answer !== null && (
           <div className={`feedback ${correct ? "success" : ""}`}>

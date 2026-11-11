@@ -80,6 +80,26 @@ export function Simulator() {
           </p>
         </div>
       </div>
+      <aside className="step-explanation">
+        <strong>
+          {!current
+            ? "Antes de ejecutar: elige n e imagina cuántas celdas visitarás."
+            : s.completed === s.total
+              ? "Terminaste todas las filas."
+              : current.j === s.n - 1
+                ? `Completaste la fila i = ${current.i}.`
+                : `Estás recorriendo la fila i = ${current.i}.`}
+        </strong>
+        <p>
+          {!current
+            ? "Puedes avanzar una operación o mover el control de pasos para explorar el recorrido."
+            : s.completed === s.total
+              ? `${s.n} filas × ${s.n} columnas = ${s.total} operaciones. Cambia n y compara cómo crece el trabajo.`
+              : current.j === s.n - 1
+                ? "En el siguiente paso i aumenta en 1 y el ciclo interno vuelve a j = 0."
+                : `i se mantiene fijo mientras j recorre las columnas. Acabas de visitar j = ${current.j}; la siguiente será j = ${current.j + 1}.`}
+        </p>
+      </aside>
       <div className="sim-stats">
         <div>
           <span>OPERACIONES</span>
@@ -111,6 +131,32 @@ export function Simulator() {
         max={s.total}
         aria-label="Progreso de simulación"
       />
+      <div className="sim-explore">
+        <label htmlFor="speed">
+          Velocidad de exploración
+          <select
+            id="speed"
+            value={s.speed}
+            onChange={(e) => s.setSpeed(+e.target.value)}
+          >
+            <option value={500}>Lenta</option>
+            <option value={180}>Normal</option>
+            <option value={60}>Rápida</option>
+          </select>
+        </label>
+        <label htmlFor="timeline">
+          Explora cualquier paso: {s.completed}
+          <input
+            id="timeline"
+            aria-label="Explorar paso de simulación"
+            type="range"
+            min="0"
+            max={s.total}
+            value={s.completed}
+            onChange={(e) => s.seek(+e.target.value)}
+          />
+        </label>
+      </div>
       <div className="sim-controls">
         <button
           className="primary"

@@ -1474,3 +1474,275 @@ progress::-moz-progress-bar {
     line-height: 1.5;
   }
 }
+.pair-task > p {
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+.pair-board {
+  display: grid;
+  grid-template-columns: 40px repeat(4, minmax(40px, 1fr));
+  gap: 6px;
+  max-width: 470px;
+  margin: 22px auto;
+}
+.pair-board strong {
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: #bab0d2;
+}
+.pair-row {
+  display: contents;
+}
+.pair-board button {
+  aspect-ratio: 1;
+  max-height: 70px;
+  width: 100%;
+  background: #242139;
+  color: #a99ac3;
+  border: 1px solid #4c4163;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+.pair-board button.marked {
+  background: #1f493f;
+  border-color: #4caa93;
+  color: #8ce6ce;
+}
+.task-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0;
+  font-size: 12px;
+  color: #bfb0df;
+}
+.numeric-task {
+  background: #181b2d;
+  border: 1px solid #35324b;
+  padding: 20px;
+  border-radius: 10px;
+}
+.numeric-task label,
+.duplicate-lab form label {
+  display: block;
+  font-size: 13px;
+  color: #e2d7f6;
+}
+.numeric-task label span {
+  display: block;
+  font-size: 11px;
+  color: #9499b3;
+  margin-top: 5px;
+}
+.numeric-task > div,
+.array-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 13px;
+}
+.numeric-task input,
+.array-input input {
+  min-width: 0;
+  flex: 1;
+  background: #0e111d;
+  border: 1px solid #4d4265;
+  border-radius: 8px;
+  padding: 12px;
+  color: #e9ddff;
+  font: inherit;
+  font-size: 15px;
+}
+.sim-explore {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 25px;
+  margin-top: 20px;
+  border-top: 1px solid #303044;
+  padding-top: 20px;
+}
+.sim-explore label {
+  font-size: 11px;
+  color: #b3a6cc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sim-explore select {
+  padding: 8px;
+  border: 1px solid #4b405c;
+  border-radius: 6px;
+  background: #252236;
+  font-size: 12px;
+  color: #e1d4fa;
+}
+.duplicate-lab {
+  padding: 28px;
+  margin-bottom: 22px;
+}
+.duplicate-lab h3 {
+  font-size: 25px;
+  margin: 14px 0 10px;
+  letter-spacing: -0.6px;
+}
+.duplicate-lab > p {
+  font-size: 12px;
+}
+.scenario-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.duplicate-lab form {
+  padding: 18px;
+  background: #191b2a;
+  border-radius: 10px;
+  border: 1px solid #303347;
+  margin: 18px 0;
+}
+.duplicate-lab form p {
+  font-size: 12px;
+  color: #f5b6c9;
+  margin-top: 10px;
+}
+.trace-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.trace-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #3a3550;
+  background: #0e111d;
+  border-radius: 12px;
+}
+.trace-card h4 {
+  font-size: 12px;
+  color: #cbb7f1;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.array-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 66px;
+  align-content: flex-start;
+  margin-bottom: 16px;
+}
+.array-chips > span {
+  min-width: 40px;
+  border: 1px solid #34334c;
+  border-radius: 7px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1b1e2e;
+  font-size: 19px;
+  transition: background 0.2s;
+}
+.array-chips small {
+  font-size: 7px;
+  color: #9293b1;
+  margin-bottom: 4px;
+}
+.array-chips .highlighted {
+  background: #5b457a;
+  border-color: #bc9af1;
+  color: #fff;
+}
+.trace-count {
+  font-size: 20px;
+  font-weight: 500;
+  color: #75ddc5;
+  display: block;
+  margin-bottom: 12px;
+}
+.trace-card p {
+  font-size: 12px;
+  min-height: 80px;
+  color: #acadc3;
+}
+.seen-values {
+  font: 11px monospace;
+  padding: 10px;
+  border: 1px solid #2b4945;
+  color: #86d9c4;
+  background: #132826;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.trace-result {
+  font-size: 10px;
+  color: #bfb2da;
+  border-top: 1px solid #302c43;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+@media (max-width: 760px) {
+  .duplicate-lab {
+    padding: 21px 15px;
+  }
+  .trace-columns {
+    grid-template-columns: 1fr;
+  }
+  .numeric-task > div,
+  .array-input {
+    flex-direction: column;
+  }
+  .sim-explore {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .pair-board {
+    grid-template-columns: 32px repeat(4, minmax(32px, 1fr));
+  }
+  .numeric-task {
+    padding: 15px;
+  }
+  .task-controls {
+    font-size: 11px;
+  }
+  .duplicate-lab h3 {
+    font-size: 22px;
+  }
+  .trace-card p {
+    min-height: 0;
+  }
+}
+.code-disclosure {
+  margin: 15px 0;
+}
+.code-disclosure summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: #bfa9ed;
+  padding: 9px 0;
+}
+.code-disclosure summary:focus-visible {
+  outline: 3px solid #5ce7d0;
+  outline-offset: 3px;
+}
+.step-explanation {
+  margin-top: 22px;
+  padding: 15px;
+  border-left: 3px solid #a78bdf;
+  background: #211d31;
+  border-radius: 0 8px 8px 0;
+}
+.step-explanation strong {
+  font-size: 12px;
+  color: #ddc8fb;
+}
+.step-explanation p {
+  font-size: 11px;
+  color: #b2a8c7;
+  margin-top: 6px;
+}

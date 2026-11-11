@@ -5,6 +5,18 @@ export type Learning = {
   connection: string;
 };
 const recaps: Record<string, Learning> = {
+  "half-inner": {
+    concept: "La mitad de n sigue dependiendo de n",
+    steps: [
+      "Con n = 4, el ciclo interno hace 2 vueltas por cada una de las 4 externas: 8 comparaciones.",
+      "Con n = 8, hace 4 vueltas por cada una de las 8 externas: 32 comparaciones.",
+      "La entrada se duplicó, pero el trabajo se multiplicó por 4. La expresión es n²/2.",
+    ],
+    takeaway:
+      "Un límite fijo como 3 produce 3n; un límite como n/2 sigue creciendo con n y aquí produce n²/2. Observa de qué depende cada límite.",
+    connection:
+      "Lleva esta distinción al laboratorio final: cambiar el recorrido y recordar valores puede cambiar el crecimiento.",
+  },
   "predict-5": {
     concept: "Construir la cuenta desde una fila",
     steps: [
@@ -45,11 +57,11 @@ const recaps: Record<string, Learning> = {
     concept: "Separar y sumar tareas consecutivas",
     steps: [
       "La primera tarea compara todos con todos: 50 × 50 = 2500 operaciones.",
-      "Cuando termina, la segunda tarea visita los 50 datos una vez: 50 operaciones más.",
-      "El total es 2500 + 50 = 2550, no 2500 × 50.",
+      "Cuando termina, se hacen dos visitas completas: 50 + 50 = 100 operaciones más.",
+      "El total es 2500 + 50 + 50 = 2600, no 2500 × 50.",
     ],
     takeaway:
-      "La cuenta exacta de este modelo es n² + n. Su crecimiento sigue siendo cuadrático porque n² domina al aumentar n.",
+      "La cuenta exacta de este modelo es n² + 2n. Su crecimiento sigue siendo cuadrático porque n² domina al aumentar n.",
     connection:
       "Ya puedes comparar expresiones distintas: calcula cuánto trabajo hace cada estrategia con la misma entrada.",
   },
