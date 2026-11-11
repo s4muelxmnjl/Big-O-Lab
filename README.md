@@ -21,7 +21,9 @@ En el entorno cloud, si la caché del usuario no es escribible: `npm ci --cache 
 4. **Investigar:** siete fragmentos; acceso, ciclos simples, consecutivos, anidados, triangulares, un interno constante y otro de n/2 vueltas.
 5. **Optimizar:** laboratorio con arreglos editables de 2 a 12 números, casos con y sin repetidos y trazas reales por pasos o reproducción; después compara crecimiento y memoria y resuelve cinco preguntas de transferencia.
 
-En varios retos debes escribir tu cálculo, en lugar de elegir entre opciones. Los ejercicios combinan tareas y distinguen límites constantes de límites que crecen con la entrada. Hay 19 retos en total.
+Los primeros retos usan números pequeños y opciones de respuesta; después vuelven los cálculos escritos. El simulador empieza en 3 × 3 y velocidad lenta. Los ejercicios combinan tareas y distinguen límites constantes de límites que crecen con la entrada. Hay 19 retos en total.
+
+Cada reto ofrece una guía «Cómo resolver este reto» con tres pasos y un ejemplo parecido que usa otros datos. En los primeros está abierta desde el inicio; en los avanzados se consulta al necesitarla.
 
 Después de cada acierto se explica lo resuelto en tres pasos, con una idea clave y una conexión al siguiente reto. Las explicaciones se pueden repasar al volver a un ejercicio resuelto. La última respuesta conserva su explicación hasta que eliges ver la victoria.
 

@@ -1,13 +1,13 @@
 # Big O Lab checkpoint
 
-Objetivo: juego práctico en español para principiantes, con retos cada vez más exigentes y explicaciones al resolverlos.
+Objetivo: juego práctico en español para principiantes, con primeros retos accesibles, dificultad gradual y guías antes y después de resolverlos.
 
 ## Implementado
 
 - Cinco niveles, 19 retos, desbloqueos en orden, 100 XP una vez por reto, insignias y victoria. Se conservan los identificadores y el progreso anterior.
 - Primer reto: construir los 16 encuentros entre cuatro estudiantes en un tablero interactivo. Una casilla solo cuenta una vez.
-- Predicciones y algunas evaluaciones: escribir cálculos propios y comprobarlos. Incluye n² + 2n y distinguir un interno fijo de otro con n/2 vueltas.
-- Simulador n² (n de 1 a 20), iniciar/pausar/paso/reiniciar, velocidad ajustable, explorar cualquier paso y explicación contextual de índices y cambios de fila.
+- Predicciones: los tres primeros cálculos usan opciones y cuadrículas pequeñas; los posteriores y algunas evaluaciones piden escribir cálculos propios. Incluye n² + 2n y distinguir un interno fijo de otro con n/2 vueltas.
+- Simulador n² (n de 1 a 20; inicia en 3 × 3 y velocidad lenta), iniciar/pausar/paso/reiniciar, velocidad ajustable, explorar cualquier paso y explicación contextual de índices y cambios de fila.
 - Misión final: arreglos editables de 2 a 12 enteros, escenarios de repetidos al principio/final, trazas reales por parejas y Set, resaltar posiciones, mostrar memoria, salida temprana, ejecutar/pausar/paso/reiniciar. Las cuentas son representativas, no tiempos reales.
 - Los 19 retos conservan su recapitulación de tres pasos, idea clave y conexión al siguiente ejercicio. La última explicación permanece antes de ver la victoria.
 - Interfaz adaptable, teclado, movimiento reducido, progreso local versionado y manejo de almacenamiento corrupto o no disponible.
@@ -22,8 +22,12 @@ Objetivo: juego práctico en español para principiantes, con retos cada vez má
 
 ## Entrega y continuación
 
-Subir directamente a `main`, sin PR, según instrucción del usuario. `.github/workflows/pages.yml` valida y publica Pages. Se verificó que la ejecución del commit anterior `9d7db2c` terminó con éxito; el bloqueo inicial de activación de Pages ya está resuelto. La API de GitHub puede seguir bloqueada por la red, pero el HTML público de Actions permite comprobar las ejecuciones.
+Subir directamente a `main`, sin PR, según instrucción del usuario. `.github/workflows/pages.yml` valida y publica Pages. Se verificó que la ejecución del commit anterior `68fea73` terminó con éxito; el bloqueo inicial de activación de Pages ya está resuelto. La API de GitHub puede seguir bloqueada por la red, pero el HTML público de Actions permite comprobar las ejecuciones.
 
 Usar el checkout existente `/workspace/Big-O-Lab`, sin worktrees salvo petición explícita. `npm ci --cache /workspace/.npm-cache` si la caché del usuario no es escribible; `npm run dev`. No hay backend, secretos ni APIs externas.
 
 Próxima tarea exacta: comprobar la ejecución de Pages tras subir este cambio; después iterar a partir de pruebas de jugadores, sin añadir nuevas dependencias por decoración.
+
+## Actualización: inicio accesible y método de resolución
+
+Se simplificaron los retos de predicción iniciales (3×3, 4×4 y 4×2). Los siguientes suben a tareas combinadas con n=10 y comparación de estrategias con n=20. Los retos de los niveles 4 y 5 mantienen su dificultad anterior. Se añadieron guías para los 19 retos: tres pasos y un ejemplo análogo con otros datos. Las primeras cinco guías están abiertas al inicio; las demás son desplegables. Archivos nuevos: `src/domain/guides.ts` y `src/components/SolveGuide.tsx`. Se mantienen IDs, XP y progreso guardado. Validación: build correcto, 10/10 pruebas de lógica y 4/4 de navegador; recorrido comprueba las 19 guías, opciones iniciales, cálculos posteriores, explicaciones, desbloqueos y persistencia.

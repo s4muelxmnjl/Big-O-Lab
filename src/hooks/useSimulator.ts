@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { advance, gridSize, square } from "../domain/model";
 export function useSimulator() {
-  const [n, setN] = useState(5);
+  const [n, setN] = useState(3);
   const [completed, setCompleted] = useState(0);
-  const [speed, setSpeed] = useState(180);
+  const [speed, setSpeed] = useState(500);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
     if (!playing || completed >= square(n)) return;

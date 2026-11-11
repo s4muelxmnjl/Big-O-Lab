@@ -1746,3 +1746,65 @@ progress::-moz-progress-bar {
   color: #b2a8c7;
   margin-top: 6px;
 }
+.solve-guide {
+  margin: 18px 0;
+  border: 1px solid #3e3e5a;
+  background: #1a1b2e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.guide-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 15px;
+  background: #25213a;
+  color: #d6c3f5;
+  font-size: 12px;
+  font-weight: 600;
+}
+.guide-toggle > svg:last-child {
+  margin-left: auto;
+}
+.solve-guide section {
+  padding: 19px;
+}
+.solve-guide ol {
+  list-style: decimal;
+  padding-left: 20px;
+  display: grid;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #b9b4ce;
+}
+.solve-guide li {
+  padding-left: 6px;
+}
+.solve-guide li::marker {
+  color: #b79ae9;
+  font-weight: 600;
+}
+.guide-example {
+  margin: 18px 0 12px;
+  padding: 14px;
+  background: #142b2b;
+  border-left: 3px solid #5ce7d0;
+  border-radius: 0 7px 7px 0;
+}
+.guide-example strong {
+  font-size: 11px;
+  color: #9cddce;
+}
+.guide-example p {
+  font-size: 12px;
+  color: #b5d1cb;
+  margin-top: 5px;
+}
+@media (max-width: 760px) {
+  .solve-guide section {
+    padding: 16px 13px;
+  }
+}

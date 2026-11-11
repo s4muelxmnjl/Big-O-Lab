@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ArrowRight, Check, Lightbulb, RotateCcw } from "lucide-react";
 import { PracticalAnswer, isNumericChallenge } from "./PracticalAnswer";
+import { SolveGuide } from "./SolveGuide";
+import { isStarterChallenge } from "../domain/guides";
 import { LearningRecap } from "./LearningRecap";
 import type { Challenge } from "../domain/challenges";
 export function ChallengeCard({
@@ -23,12 +25,14 @@ export function ChallengeCard({
         <span className="xp-tag">{solved ? "COMPLETADO" : "+100 XP"}</span>
       </div>
       <h3>{q.question}</h3>
+      <SolveGuide id={q.id} />
       {q.code && (
         <pre className="code-block">
           <code>{q.code}</code>
         </pre>
       )}
-      {q.id === "intro" || isNumericChallenge(q) ? (
+      {q.id === "intro" ||
+      (isNumericChallenge(q) && !isStarterChallenge(q.id)) ? (
         <PracticalAnswer
           challenge={q}
           onSubmit={(index) => {

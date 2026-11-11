@@ -20,9 +20,9 @@ const recaps: Record<string, Learning> = {
   "predict-5": {
     concept: "Construir la cuenta desde una fila",
     steps: [
-      "Un dato se compara con los 5 datos: 5 operaciones.",
-      "Repite ese trabajo para los otros 4 datos: hay 5 filas iguales.",
-      "5 + 5 + 5 + 5 + 5 = 25; la multiplicación 5 × 5 abrevia esa suma.",
+      "Una fila tiene 3 celdas: visitar esa fila cuesta 3 operaciones.",
+      "Hay otras dos filas iguales; en total son 3 filas.",
+      "3 + 3 + 3 = 9; la multiplicación 3 × 3 abrevia esa suma.",
     ],
     takeaway:
       "En un recorrido completo de todos con todos, la cuenta representativa es n².",
@@ -32,9 +32,9 @@ const recaps: Record<string, Learning> = {
   "predict-10": {
     concept: "Usar el crecimiento en vez de empezar de cero",
     steps: [
-      "Antes había 5 filas y 5 columnas: 25 celdas.",
-      "Ahora hay el doble de filas y el doble de columnas: 10 por 10.",
-      "Multiplica el trabajo anterior por 2 × 2: 25 × 4 = 100.",
+      "Antes había 2 filas y 2 columnas: 4 celdas.",
+      "Ahora hay el doble de filas y el doble de columnas: 4 por 4.",
+      "Cuenta las nuevas celdas: 4 + 4 + 4 + 4 = 16. Son cuatro veces las 4 celdas iniciales.",
     ],
     takeaway:
       "Duplicar n en el modelo n² cuadruplica el trabajo, en lugar de duplicarlo.",
@@ -44,9 +44,9 @@ const recaps: Record<string, Learning> = {
   "predict-20": {
     concept: "Contar un rectángulo, no asumir un cuadrado",
     steps: [
-      "Hay 20 datos que inician una comparación: 20 filas.",
-      "Cada fila revisa solo los primeros 10 datos: 10 comparaciones por fila.",
-      "Multiplica los límites reales: 20 × 10 = 200, no 20 × 20.",
+      "Hay 4 filas que debemos visitar.",
+      "Cada fila tiene solo 2 celdas, no 4.",
+      "Suma 2 + 2 + 2 + 2 = 8, igual que 4 × 2.",
     ],
     takeaway:
       "La cuenta depende de los recorridos concretos. Un ciclo interno no siempre visita los n datos.",
@@ -56,9 +56,9 @@ const recaps: Record<string, Learning> = {
   "predict-50": {
     concept: "Separar y sumar tareas consecutivas",
     steps: [
-      "La primera tarea compara todos con todos: 50 × 50 = 2500 operaciones.",
-      "Cuando termina, se hacen dos visitas completas: 50 + 50 = 100 operaciones más.",
-      "El total es 2500 + 50 + 50 = 2600, no 2500 × 50.",
+      "La primera tarea compara todos con todos: 10 × 10 = 100 operaciones.",
+      "Cuando termina, se hacen dos visitas completas: 10 + 10 = 20 operaciones más.",
+      "El total es 100 + 10 + 10 = 120, no 100 × 10.",
     ],
     takeaway:
       "La cuenta exacta de este modelo es n² + 2n. Su crecimiento sigue siendo cuadrático porque n² domina al aumentar n.",
@@ -68,9 +68,9 @@ const recaps: Record<string, Learning> = {
   "predict-100": {
     concept: "Comparar dos estrategias con el mismo tamaño",
     steps: [
-      "Sustituye n = 100 en A: 100² = 10000 operaciones.",
-      "Sustituye el mismo n en B: 3 × 100 = 300 operaciones.",
-      "En este modelo de igual costo por operación, 300 es menor que 10000.",
+      "Sustituye n = 20 en A: 20² = 400 operaciones.",
+      "Sustituye el mismo n en B: 3 × 20 = 60 operaciones.",
+      "En este modelo de igual costo por operación, 60 es menor que 400.",
     ],
     takeaway:
       "Compara con la misma entrada y supuestos explícitos. Las cuentas representativas no son segundos reales.",

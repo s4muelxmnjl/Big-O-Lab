@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { guideFor, isStarterChallenge } from "../src/domain/guides";
 import { challenges } from "../src/domain/challenges";
 async function solveLevel(
   page: import("@playwright/test").Page,
@@ -11,6 +12,19 @@ async function solveLevel(
         page.getByRole("button", { name: `Desafío ${i + 2}`, exact: true }),
       ).toBeDisabled();
     }
+    const help = page.getByRole("button", { name: "Cómo resolver este reto" });
+    await expect(help).toHaveAttribute(
+      "aria-expanded",
+      String(isStarterChallenge(qs[i].id)),
+    );
+    if (!isStarterChallenge(qs[i].id)) await help.click();
+    const guide = page.getByRole("region", {
+      name: "Guía para resolver el reto",
+    });
+    await expect(guide.getByRole("listitem")).toHaveCount(3);
+    await expect(
+      guide.getByText(guideFor(qs[i].id).example, { exact: true }),
+    ).toBeVisible();
     if (qs[i].id === "intro") {
       for (const row of ["Ana", "Leo", "Sol", "Max"])
         for (const col of ["Ana", "Leo", "Sol", "Max"])
@@ -21,7 +35,10 @@ async function solveLevel(
             })
             .click();
       await page.getByRole("button", { name: "Comprobar recorrido" }).click();
-    } else if (/^\d+$/.test(qs[i].options[qs[i].answer])) {
+    } else if (
+      /^\d+$/.test(qs[i].options[qs[i].answer]) &&
+      !isStarterChallenge(qs[i].id)
+    ) {
       await page
         .getByLabel("Calcula tu respuesta")
         .fill(qs[i].options[qs[i].answer]);
@@ -79,10 +96,11 @@ test("recorrido completo, persistencia y XP idempotente", async ({ page }) => {
   await solveLevel(page, 1);
   await expect(page.getByText("100 XP", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Siguiente nivel" }).click();
+  await expect(page.getByLabel("Velocidad de exploración")).toHaveValue("500");
   const counter = page.getByTestId("counter");
-  await expect(counter).toHaveText("0 / 25");
+  await expect(counter).toHaveText("0 / 9");
   await page.getByRole("button", { name: "Siguiente paso" }).click();
-  await expect(counter).toHaveText("1 / 25");
+  await expect(counter).toHaveText("1 / 9");
   await page.getByRole("button", { name: "Iniciar", exact: true }).click();
   await page.getByRole("button", { name: "Pausar", exact: true }).click();
   const paused = await counter.textContent();
@@ -111,8 +129,9 @@ test("recorrido completo, persistencia y XP idempotente", async ({ page }) => {
   await expect(counter).toHaveText("13 / 400");
   await solveLevel(page, 2);
   await page.getByRole("button", { name: "Siguiente nivel" }).click();
-  await page.getByLabel("Calcula tu respuesta").fill("10");
-  await page.getByRole("button", { name: "Comprobar cálculo" }).click();
+  await expect(page.locator(".answer")).toHaveCount(3);
+  await expect(page.getByLabel("Calcula tu respuesta")).toHaveCount(0);
+  await page.locator(".answer").nth(0).click();
   await expect(page.getByText("Todavía no. Probemos otra vez.")).toBeVisible();
   await expect(page.getByText("200 XP", { exact: true })).toBeVisible();
   await solveLevel(page, 3);
