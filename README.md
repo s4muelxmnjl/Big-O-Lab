@@ -17,11 +17,13 @@ En el entorno cloud, si la caché del usuario no es escribible: `npm ci --cache 
 
 1. **Entender:** analogía de estudiantes, entrada n y crecimiento asintótico.
 2. **Experimentar:** cuadrícula de 1 a 20, iniciar/pausar, siguiente paso, reiniciar, índices y pseudocódigo destacado.
-3. **Predecir:** cinco tamaños, desde 5 hasta 100 datos.
+3. **Predecir:** cinco retos de dificultad creciente: contar, duplicar la entrada, ajustar un recorrido, sumar tareas y comparar estrategias.
 4. **Investigar:** seis fragmentos; acceso, ciclos simples, consecutivos, anidados, triangulares y un interno constante.
 5. **Optimizar:** detección de repetidos por parejas frente a Set; cuentas, memoria y cinco preguntas de transferencia.
 
-Cada respuesta correcta otorga 100 XP una sola vez. Completar un nivel desbloquea el siguiente y entrega una insignia. Puedes repetir niveles, consultar pistas y reiniciar el progreso. Se guarda localmente con un formato versionado; si el almacenamiento no está disponible, se informa y la sesión sigue funcionando.
+Después de cada acierto se explica lo resuelto en tres pasos, con una idea clave y una conexión al siguiente reto. Las explicaciones se pueden repasar al volver a un ejercicio resuelto. La última respuesta conserva su explicación hasta que eliges ver la victoria.
+
+Cada respuesta correcta otorga 100 XP una sola vez. Los retos se desbloquean en orden y una barra muestra cuántos has resuelto. Completar un nivel desbloquea el siguiente y entrega una insignia. Puedes repetir niveles, consultar pistas y reiniciar el progreso. Se guarda localmente con un formato versionado; si el almacenamiento no está disponible, se informa y la sesión sigue funcionando.
 
 ## Validación
 

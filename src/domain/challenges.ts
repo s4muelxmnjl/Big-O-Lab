@@ -1,3 +1,4 @@
+import { learningFor, type Learning } from "./learning";
 export type Challenge = {
   id: string;
   level: number;
@@ -8,6 +9,7 @@ export type Challenge = {
   answer: number;
   explanation: string;
   hint: string;
+  learning: Learning;
 };
 const q = (
   id: string,
@@ -29,6 +31,7 @@ const q = (
   explanation,
   hint,
   code,
+  learning: learningFor(id),
 });
 export const challenges: Challenge[] = [
   q(
@@ -55,17 +58,55 @@ export const challenges: Challenge[] = [
     "(2n)² = 4n². Duplicar ambos lados de la cuadrícula cuadruplica las celdas.",
     "Al duplicar n, crecen las filas y también las columnas.",
   ),
-  ...[5, 10, 20, 50, 100].map((n) =>
-    q(
-      `predict-${n}`,
-      3,
-      `Predicción · n = ${n}`,
-      `En el modelo de n² operaciones, ¿cuántas se realizan para n = ${n}?`,
-      [`${n * 2}`, `${n * n}`, `${n * n + n}`],
-      1,
-      `${n} × ${n} = ${n * n}. Contamos una operación representativa por celda; no segundos ni todas las instrucciones de la máquina.`,
-      `Multiplica ${n} por sí mismo.`,
-    ),
+  q(
+    "predict-5",
+    3,
+    "01 · Cuenta una cuadrícula",
+    "Un recorrido completo compara cada uno de 5 datos con los 5 datos, incluido él mismo. ¿Cuántas operaciones representativas realiza?",
+    ["10", "25", "30"],
+    1,
+    "Son 5 filas de 5 comparaciones: 5 × 5 = 25. Sumar 5 + 5 correspondería a dos recorridos separados.",
+    "Cuenta las columnas de una fila y después cuántas filas hay.",
+  ),
+  q(
+    "predict-10",
+    3,
+    "02 · Cambia el tamaño",
+    "Con n = 5 un recorrido n² hace 25 operaciones. Si n pasa a 10, ¿cuántas hará el mismo modelo?",
+    ["50", "100", "250"],
+    1,
+    "n se duplica y crecen las dos dimensiones: 25 × 2 × 2 = 100, igual que 10².",
+    "No se duplica solo el número de filas: también las columnas.",
+  ),
+  q(
+    "predict-20",
+    3,
+    "03 · Ajusta el recorrido",
+    "Ahora cada uno de 20 datos se compara solo con los primeros 10 datos, incluido él mismo si aparece allí. Sin salidas tempranas, ¿cuántas comparaciones se hacen?",
+    ["400", "30", "200"],
+    2,
+    "Hay 20 filas, pero solo 10 columnas: 20 × 10 = 200. Debes mirar los límites reales, no usar n² automáticamente.",
+    "Dibuja un rectángulo de 20 filas y 10 columnas.",
+  ),
+  q(
+    "predict-50",
+    3,
+    "04 · Combina dos tareas",
+    "Con n = 50, primero haces un recorrido completo de todos con todos (n²). Después visitas una vez cada dato (n). ¿Cuántas operaciones representativas suman ambas tareas?",
+    ["2550", "2500", "125000"],
+    0,
+    "Primero 50 × 50 = 2500 operaciones y después 50 visitas: 2500 + 50 = 2550. Las tareas consecutivas se suman.",
+    "Calcula cada tarea por separado; la segunda sucede después de terminar la primera.",
+  ),
+  q(
+    "predict-100",
+    3,
+    "05 · Compara estrategias",
+    "Para n = 100, la estrategia A hace n² operaciones y B hace 3n. Bajo este modelo de operaciones de igual costo, ¿cuál hace menos trabajo y cuánto?",
+    ["A: 200 operaciones", "B: 300 operaciones", "B: 10000 operaciones"],
+    1,
+    "A hace 100 × 100 = 10000; B hace 3 × 100 = 300. En esta entrada y bajo este modelo, B requiere menos trabajo.",
+    "Sustituye n por 100 en las dos expresiones antes de comparar.",
   ),
   q(
     "index",
@@ -181,15 +222,15 @@ export const challenges: Challenge[] = [
     "final-choice",
     5,
     "Evaluación · 5 de 5",
-    "¿Qué afirmación usarías para elegir una solución en un proyecto real?",
+    "Debes buscar repetidos entre 1000 números distintos sin modificar el arreglo. El presupuesto del modelo es 20000 operaciones y memoria para 1000 valores extra. ¿Qué solución de las estudiadas cumple ambos límites?",
     [
-      "O(n²) siempre es inaceptable",
-      "Big O indica segundos exactos",
-      "Comparo crecimiento, memoria y tamaño real",
+      "Parejas: 499500 comparaciones, sin memoria extra",
+      "Set: 2000 operaciones, pero ninguna memoria extra",
+      "Set: 2000 operaciones y hasta 1000 valores extra",
     ],
     2,
-    "Big O describe cómo escala el trabajo, no el tiempo exacto. El tamaño de entrada, los recursos y las constantes también importan.",
-    "El crecimiento es una herramienta para decidir, no un cronómetro.",
+    "Las parejas hacen 1000 × 999 / 2 = 499500 comparaciones, por encima del límite. Set hace 1000 consultas y 1000 inserciones y almacena hasta 1000 valores. Bajo el costo promedio constante supuesto, cumple el modelo y la memoria disponible; esto no mide segundos reales.",
+    "Comprueba dos condiciones: trabajo no mayor que 20000 y memoria adicional no mayor que 1000 valores.",
   ),
 ];
 export const levels = [

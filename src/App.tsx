@@ -17,7 +17,12 @@ import {
   Zap,
 } from "lucide-react";
 import { levels, challenges } from "./domain/challenges";
-import { isUnlocked, levelComplete, xp } from "./domain/model";
+import {
+  challengeUnlocked,
+  isUnlocked,
+  levelComplete,
+  xp,
+} from "./domain/model";
 import { useProgress } from "./hooks/useProgress";
 import { ChallengeCard } from "./components/ChallengeCard";
 import { Simulator } from "./components/Simulator";
@@ -241,9 +246,9 @@ export default function App() {
                   <p>
                     <strong>Primero imagina. Después calcula.</strong>
                     <br />
-                    Cada recorrido completo tiene n filas y n columnas. Piensa
-                    en el área de la cuadrícula, incluso cuando sea demasiado
-                    grande para dibujarla.
+                    Empieza contando celdas. Después cambia el tamaño, ajusta
+                    los recorridos y combina tareas. Cada reto resuelto
+                    desbloquea el siguiente, con una nueva idea para aplicar.
                   </p>
                 </div>
               )}
@@ -271,11 +276,38 @@ export default function App() {
                   {questionIndex + 1} / {questions.length}
                 </span>
               </div>
+              <div className="challenge-progress">
+                <div>
+                  <strong>
+                    {
+                      questions.filter((item) =>
+                        progress.solved.includes(item.id),
+                      ).length
+                    }{" "}
+                    de {questions.length} retos resueltos
+                  </strong>
+                  <span>
+                    {complete
+                      ? "Nivel completado"
+                      : level < 5
+                        ? `Completa estos retos para desbloquear el nivel ${level + 1}`
+                        : "Completa la evaluación para alcanzar la victoria"}
+                  </span>
+                </div>
+                <progress
+                  aria-label="Retos resueltos del nivel"
+                  value={
+                    questions.filter((item) =>
+                      progress.solved.includes(item.id),
+                    ).length
+                  }
+                  max={questions.length}
+                />
+              </div>
               {questions.length > 1 && (
                 <div className="question-tabs" aria-label="Desafíos del nivel">
                   {questions.map((item, i) => {
-                    const unlocked =
-                      i === 0 || progress.solved.includes(questions[i - 1].id);
+                    const unlocked = challengeUnlocked(progress, item.id);
                     return (
                       <button
                         key={item.id}
@@ -299,7 +331,10 @@ export default function App() {
                 key={q.id}
                 challenge={q}
                 solved={progress.solved.includes(q.id)}
-                onAnswer={solve}
+                onAnswer={(id, answer) => {
+                  setVictoryOpen(false);
+                  solve(id, answer);
+                }}
               />
               {progress.solved.includes(q.id) &&
                 questionIndex < questions.length - 1 && (

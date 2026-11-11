@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Check, Lightbulb, RotateCcw } from "lucide-react";
+import { LearningRecap } from "./LearningRecap";
 import type { Challenge } from "../domain/challenges";
 export function ChallengeCard({
   challenge: q,
@@ -66,6 +67,7 @@ export function ChallengeCard({
           </div>
         )}
       </div>
+      {solved && <LearningRecap learning={q.learning} />}
       <button
         className="text-button hint"
         aria-expanded={hint}

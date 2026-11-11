@@ -29,7 +29,7 @@ export function award(p: Progress, id: string, answer: number): Progress {
     !q ||
     !isCorrect(id, answer) ||
     p.solved.includes(id) ||
-    !isUnlocked(p, q.level)
+    !challengeUnlocked(p, id)
   )
     return p;
   return { ...p, solved: [...p.solved, id] };
@@ -52,3 +52,12 @@ export const coordinates = (completed: number, n: number) =>
   completed === 0
     ? null
     : { i: Math.floor((completed - 1) / n), j: (completed - 1) % n };
+
+export function challengeUnlocked(p: Progress, id: string): boolean {
+  const q = challenges.find((item) => item.id === id);
+  if (!q || !isUnlocked(p, q.level)) return false;
+  const group = challenges.filter((item) => item.level === q.level);
+  return group
+    .slice(0, group.indexOf(q))
+    .every((item) => p.solved.includes(item.id));
+}

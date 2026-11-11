@@ -6,11 +6,33 @@ async function solveLevel(
 ) {
   const qs = challenges.filter((q) => q.level === level);
   for (let i = 0; i < qs.length; i++) {
+    if (i < qs.length - 1) {
+      await expect(
+        page.getByRole("button", { name: `Desafío ${i + 2}`, exact: true }),
+      ).toBeDisabled();
+    }
     await page.locator(".answer").nth(qs[i].answer).click();
-    if (i < qs.length - 1)
+    await expect(
+      page.getByRole("progressbar", { name: "Retos resueltos del nivel" }),
+    ).toHaveAttribute("value", String(i + 1));
+    const recap = page.getByRole("region", {
+      name: "Explicación del punto resuelto",
+    });
+    await expect(
+      recap.getByRole("heading", { name: qs[i].learning.concept }),
+    ).toBeVisible();
+    await expect(recap.getByRole("listitem")).toHaveCount(3);
+    await expect(
+      recap.getByText(qs[i].learning.takeaway, { exact: true }),
+    ).toBeVisible();
+    if (i < qs.length - 1) {
+      await expect(
+        page.getByRole("button", { name: `Desafío ${i + 2}`, exact: true }),
+      ).toBeEnabled();
       await page
         .getByRole("button", { name: "Siguiente desafío", exact: true })
         .click();
+    }
   }
 }
 test("recorrido completo, persistencia y XP idempotente", async ({ page }) => {
@@ -22,9 +44,15 @@ test("recorrido completo, persistencia y XP idempotente", async ({ page }) => {
   await page.getByRole("button", { name: /A 8 comparaciones/ }).click();
   await expect(page.getByText("Todavía no. Probemos otra vez.")).toBeVisible();
   await expect(page.getByText("0 XP", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Explicación del punto resuelto" }),
+  ).toHaveCount(0);
   await solveLevel(page, 1);
   await expect(page.getByText("100 XP", { exact: true })).toBeVisible();
   await page.reload();
+  await expect(
+    page.getByRole("heading", { name: "Contar todos con todos" }),
+  ).toBeVisible();
   await solveLevel(page, 1);
   await expect(page.getByText("100 XP", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Siguiente nivel" }).click();
@@ -60,6 +88,10 @@ test("recorrido completo, persistencia y XP idempotente", async ({ page }) => {
   await page.locator("#comparison").selectOption("100");
   await expect(page.getByText("4950", { exact: true })).toBeVisible();
   await solveLevel(page, 5);
+  await expect(
+    page.getByRole("heading", { name: "Ya piensas en grande." }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "Ver mi victoria" }).click();
   await expect(
     page.getByRole("heading", { name: "Ya piensas en grande." }),
   ).toBeVisible();

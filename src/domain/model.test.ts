@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   advance,
+  challengeUnlocked,
   award,
   coordinates,
   emptyProgress,
@@ -71,5 +72,23 @@ describe("desafíos y progreso", () => {
     expect(
       parseProgress('{"version":1,"solved":["intro","intro","fake",7]}'),
     ).toEqual({ version: 1, solved: ["intro"] });
+  });
+});
+
+describe("progresión guiada", () => {
+  it("exige resolver los retos previos incluso dentro de un nivel desbloqueado", () => {
+    let p = award(emptyProgress(), "intro", 1);
+    p = award(p, "sim", 2);
+    expect(challengeUnlocked(p, "predict-5")).toBe(true);
+    expect(challengeUnlocked(p, "predict-10")).toBe(false);
+    expect(challengeUnlocked(p, "predict-20")).toBe(false);
+    expect(award(p, "predict-20", 2)).toBe(p);
+    p = award(p, "predict-5", 1);
+    expect(challengeUnlocked(p, "predict-10")).toBe(true);
+    expect(challengeUnlocked(p, "predict-20")).toBe(false);
+    p = award(p, "predict-10", 1);
+    expect(challengeUnlocked(p, "predict-20")).toBe(true);
+    expect(challengeUnlocked(p, "invalid")).toBe(false);
+    expect(isUnlocked(p, 4)).toBe(false);
   });
 });
