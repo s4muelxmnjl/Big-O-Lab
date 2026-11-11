@@ -98,6 +98,7 @@ export default function App() {
             return (
               <button
                 key={item.short}
+                aria-label={`NIVEL 0${i + 1} ${item.short}`}
                 disabled={!unlocked}
                 aria-current={level === i + 1 ? "step" : undefined}
                 className={`nav-level ${level === i + 1 ? "selected" : ""}`}

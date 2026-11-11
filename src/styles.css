@@ -1355,3 +1355,11 @@ progress::-moz-progress-bar {
     margin: 0 0 12px 5px;
   }
 }
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0;
+}

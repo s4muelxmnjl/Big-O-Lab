@@ -10,6 +10,6 @@ Validación ejecutada: `npm run build` correcto; `npm test` 6/6; `npm run test:e
 
 Entrega: workflow `.github/workflows/pages.yml` para validar y desplegar `main`; Vite usa base relativa para alojar el proyecto bajo una subruta.
 
-Pendiente de verificar: despliegue remoto de GitHub Pages. El proxy rechaza conexiones a `api.github.com` con HTTP 403; no es evidencia de token inválido. Si Pages no estaba habilitado y el token de Actions no puede activarlo, seleccionar GitHub Actions como fuente en Settings → Pages del repositorio.
+Despliegue remoto: la primera ejecución de Actions pasó instalación, pruebas y build, pero falló en Configurar Pages: `Create Pages site failed. Resource not accessible by integration`. El token de Actions no puede activar inicialmente Pages. Se necesita seleccionar GitHub Actions como fuente en Settings → Pages y volver a ejecutar el workflow. La API directa también está bloqueada por la red del entorno (HTTP 403 a api.github.com).
 
 Próxima tarea exacta: comprobar la primera ejecución del workflow Pages y la página publicada. Para desarrollo usar el checkout existente `/workspace/Big-O-Lab`; no crear worktrees sin petición explícita. `npm ci --cache /workspace/.npm-cache` si la caché del usuario no es escribible, luego `npm run dev`.
